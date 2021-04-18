@@ -8,7 +8,7 @@ yf.pdr_override()
 
 stock_list = pd.read_csv("list.csv")
 x = 1
-number_of_stocks = 200
+number_of_stocks = 6
 while x != number_of_stocks:
     ticker = stock_list.iloc[x]["Symbols"]
     today = date.today()
@@ -24,7 +24,7 @@ while x != number_of_stocks:
     data["D"] = stoch.STOCHd_14_3_3
 
     data['Up'] = data.RSI>60
-    data['StochUp'] = (data.K>60) & (data.D>60)
+    data['StochUp'] = (data.K>60) & (data.D>60) & (data.K<80) & (data.D<80)
     df = data.iloc[-3:]
 
     df.to_csv('df.csv')
