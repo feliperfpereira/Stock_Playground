@@ -8,7 +8,7 @@ yf.pdr_override()
 
 stock_list = pd.read_csv("list.csv")
 x = 1
-number_of_stocks = 6
+number_of_stocks = 505
 while x != number_of_stocks:
     ticker = stock_list.iloc[x]["Symbols"]
     today = date.today()
