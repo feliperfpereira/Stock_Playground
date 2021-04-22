@@ -6,14 +6,19 @@ import datetime
 import yfinance as yf
 yf.pdr_override()
 
-stock_list = pd.read_csv("list.csv")
+#stock_list = pd.read_csv("list.csv")
+stock_list = pd.read_csv("t.csv")
+
 x = 1
-number_of_stocks = 505
+number_of_stocks = 474
 while x != number_of_stocks:
-    ticker = stock_list.iloc[x]["Symbols"]
-    today = date.today()
+    ticker = stock_list.iloc[x]["Symbols"]+".SA"
+    today = date.today() - datetime.timedelta(days = 40)
     start_date = today - datetime.timedelta(days = 365)
     data = pdr.get_data_yahoo(ticker, start=start_date, end=today)
+    if(len(data) <= 0):
+        x = x+1
+        continue
     openrate = data["Open"]
     close = data["Adj Close"]
     high = data["High"]
